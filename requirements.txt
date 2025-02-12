@@ -2,3 +2,5 @@ dnspython==1.16.0
 pymongo==3.12.0
 python-dotenv==1.0.1
 requests==2.32.3
+plotly
+plotly_express
