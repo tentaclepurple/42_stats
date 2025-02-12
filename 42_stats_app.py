@@ -13,7 +13,6 @@ st.set_page_config(
 )
 st.markdown("""
     <style>
-    /* ... (Resto de tu CSS personalizado, sin cambios) ... */
     .stTabs [data-baseweb="tab-list"] {
         justify-content: center;
     }
@@ -55,8 +54,8 @@ st.markdown("""
 
 @st.cache_resource
 def get_mongo_client():
-    ATLAS_URI = os.getenv('ATLAS_URI', 'mongodb://localhost:27017/')
-    DB_NAME = os.getenv('DB_NAME', 'your_database')
+    ATLAS_URI = os.getenv('ATLAS_URI')
+    DB_NAME = os.getenv('DB_NAME')
     return MongoClient(ATLAS_URI), DB_NAME
 
 @st.cache_data
@@ -119,7 +118,7 @@ with tab1:
         filtered_df = filtered_df[filtered_df['login'].str.contains(search_login, case=False)]
     st.divider()
 
-    col_df1, col_df2, col_df3 = st.columns([6.9, 9, 2])
+    col_df1, col_df2, col_df3 = st.columns([6.7, 9, 2])
     with col_df2:
         st.dataframe(
             filtered_df[['rank', 'login', 'level', 'campus', 'country']],
