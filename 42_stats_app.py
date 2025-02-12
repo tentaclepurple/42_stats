@@ -129,4 +129,66 @@ with tab1:
 
 with tab2:
     st.title("Statistics")
-    st.write("Work in progress...")
+
+    df = get_data()
+
+    fig1 = px.histogram(df, x="level", nbins=50,
+                       title="Distribution of Student Levels",
+                       color_discrete_sequence=["#2ecc71"])
+    fig1.update_layout(xaxis_title="Level", yaxis_title="Number of Students")
+    st.plotly_chart(fig1, use_container_width=True)
+
+    st.divider()
+
+    campus_counts = df['campus'].value_counts().nlargest(10)
+    fig2 = px.bar(x=campus_counts.index, y=campus_counts.values,
+                  title="Top 10 Campuses by Number of Students",
+                  color_discrete_sequence=["#2ecc71"],
+                  labels={'x': 'Campus', 'y': 'Number of Students'})
+    st.plotly_chart(fig2, use_container_width=True)
+
+    st.divider()
+
+    country_counts = df['country'].value_counts().reset_index()
+    country_counts.columns = ['country', 'count']
+
+    fig3 = px.choropleth(country_counts,
+                        locations="country",
+                        color="count",
+                        locationmode="country names",
+                        color_continuous_scale=px.colors.sequential.Greens,
+                        title="Distribution of Students by Country")
+    st.plotly_chart(fig3, use_container_width=True)
+
+    st.divider()
+
+    campus_avg_level = df.groupby('campus')['level'].mean().sort_values(ascending=False)
+    fig4 = px.bar(x=campus_avg_level.index, y=campus_avg_level.values,
+                  title="Average Level by Campus",
+                  color_discrete_sequence=["#2ecc71"],
+                  labels={'x': 'Campus', 'y': 'Average Level'})
+    st.plotly_chart(fig4, use_container_width=True)
+
+    st.divider()
+
+    campus_avg = df.groupby('campus')['level'].mean().reset_index()
+    campus_avg.columns = ['campus', 'average_level']
+
+    campus_avg = pd.merge(campus_avg, df[['campus', 'country']].drop_duplicates(), on='campus')
+
+    fig5 = px.choropleth(campus_avg,
+                        locations="country",
+                        color="average_level",
+                        locationmode="country names",
+                        color_continuous_scale=px.colors.sequential.Greens,
+                        hover_data=['campus', 'average_level'],  # Mostrar campus y nivel promedio en hover
+                        title="Average Level by Campus (Map)")
+    st.plotly_chart(fig5, use_container_width=True)
+
+    st.divider()
+
+    fig6 = px.density_heatmap(df, x="level", y="campus",
+                             marginal_x="histogram", marginal_y="box",
+                             color_continuous_scale=px.colors.sequential.Greens,
+                             title="Student Level Density by Campus")
+    st.plotly_chart(fig6, use_container_width=True)
