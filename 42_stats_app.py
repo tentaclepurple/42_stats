@@ -119,7 +119,7 @@ with tab1:
         filtered_df = filtered_df[filtered_df['login'].str.contains(search_login, case=False)]
     st.divider()
 
-    col_df1, col_df2, col_df3 = st.columns([7, 9, 2])
+    col_df1, col_df2, col_df3 = st.columns([6.9, 9, 2])
     with col_df2:
         st.dataframe(
             filtered_df[['rank', 'login', 'level', 'campus', 'country']],
