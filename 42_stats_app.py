@@ -26,7 +26,6 @@ st.markdown("""
     .stTabs [aria-selected="true"]
     .stTabs [data-baseweb="tab-highlight"]
 
-    /* Centrado de contenido */
     .block-container {
         max-width: 9000px;
         padding-top: 2rem;
@@ -35,11 +34,9 @@ st.markdown("""
         margin: 0 auto;
     }
 
-    /* Centrado del título */
     h1 {
         text-align: center;
     }
-    /* Ajuste de los selectbox */
     div.row-widget.stSelectbox {
         width: 90%;
         margin: 0 auto;
