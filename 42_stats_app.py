@@ -3,6 +3,9 @@ import pandas as pd
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots
 
 load_dotenv()
 
