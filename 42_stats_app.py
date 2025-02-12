@@ -98,7 +98,7 @@ with tab1:
 
     with col3:
         country_options = ["All"] + sorted(df['country'].unique().tolist())
-        selected_country = st.selectbox("País", country_options)
+        selected_country = st.selectbox("Country", country_options)
 
     filtered_df = df.copy()
     if selected_campus != "All":
