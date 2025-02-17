@@ -58,7 +58,7 @@ def get_mongo_client():
     DB_NAME = os.getenv('DB_NAME')
     return MongoClient(ATLAS_URI), DB_NAME
 
-@st.cache_data(ttl=0)
+@st.cache_data(ttl=43200)
 def get_data():
     client, db_name = get_mongo_client()
     db = client[db_name]
